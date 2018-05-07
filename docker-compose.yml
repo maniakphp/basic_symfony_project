@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+    data:
+        image: busybox
+        container_name: anonse_data
+        volumes:
+            - "../:/var/www/html"
+
+    server:
+        build: nginx
+        container_name: anonse_server
+        ports:
+            - "82:80"
+        volumes_from:
+            - data
+        links:
+            - php
+
+    php:
+        build: php
+        container_name: anonse_php
+        volumes_from:
+            - data
+
+    database:
+        image: mariadb:latest
+        container_name: anonse_database
+        ports:
+            - "3307:3306"
+        env_file: .env
+        volumes_from:
+            - data
