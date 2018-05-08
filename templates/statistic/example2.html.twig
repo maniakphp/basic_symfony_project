@@ -1,0 +1,19 @@
+<table border="1">
+    <tr>
+        <td>Book</td>
+        <td>Compatibility</td>
+        <td>Book Date</td>
+        <td>Female AVG age</td>
+        <td>Male AVG age</td>
+    </tr>
+
+    {% for stats in statistic %}
+        <tr>
+            <td>{{ stats.name }}</td>
+            <td>{{ stats.compatibility }}%</td>
+            <td>{{ stats.bookDate|date("Y-m-d") }}</td>
+            <td>{{ stats.avgFemale }}</td>
+            <td>{{ stats.avgMale }}</td>
+        </tr>
+    {% endfor %}
+</table>

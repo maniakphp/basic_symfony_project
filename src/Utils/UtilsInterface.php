@@ -1,14 +1,12 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Grzegorz
- * Date: 30.04.2018
- * Time: 16:50
- */
+<?php declare(strict_types=1);
 
 namespace App\Utils;
 
-
+/**
+ * Interface UtilsInterface
+ *
+ * @package App\Utils
+ */
 interface UtilsInterface
 {
 

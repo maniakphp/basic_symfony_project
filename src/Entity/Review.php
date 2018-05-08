@@ -5,15 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Reviews
+ * Review
  *
  * @ORM\Table(
  *     name="reviews",
  *     indexes={@ORM\Index(name="book_id", columns={"book_id"})}
  *     )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ReviewRepository")
  */
-class Reviews
+class Review
 {
     public const MALE = 'm';
     public const FEMALE = 'f';
@@ -52,7 +52,7 @@ class Reviews
     private $book;
 
     /**
-     * Reviews constructor.
+     * Review constructor.
      *
      * @param int    $age
      * @param string $sex
@@ -62,9 +62,10 @@ class Reviews
      */
     public function __construct(int $age, string $sex, Book $book)
     {
-        if (!in_array($sex, [self::MALE, self::FEMALE])) {
+        if ( ! in_array($sex, [self::MALE, self::FEMALE], false)) {
             throw new \InvalidArgumentException('Wrong sex type');
         }
+
         $this->age  = $age;
         $this->sex  = $sex;
         $this->book = $book;

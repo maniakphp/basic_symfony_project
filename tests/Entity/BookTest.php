@@ -1,17 +1,11 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Grzegorz
- * Date: 29.04.2018
- * Time: 17:42
- */
+<?php declare(strict_types=1);
 
 namespace App\Tests\Entity;
 
 use App\Entity\Book;
 use PHPUnit\Framework\TestCase;
 
-class BooksTest extends TestCase
+class BookTest extends TestCase
 {
     /**
      * @var Book
@@ -22,7 +16,6 @@ class BooksTest extends TestCase
      * @var array
      */
     private $provider;
-
 
     public function setUp()
     {

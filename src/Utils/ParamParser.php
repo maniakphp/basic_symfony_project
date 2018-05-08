@@ -1,15 +1,28 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Grzegorz
- * Date: 30.04.2018
- * Time: 16:36
- */
+<?php declare(strict_types=1);
 
 namespace App\Utils;
 
+use App\DTO\ParamDTO;
 
-class ParamParser
+/**
+ * Class ParamParser
+ *
+ * @package App\Utils
+ */
+class ParamParser implements UtilsInterface
 {
 
+    /**
+     * @param string $params
+     *
+     * @return ParamDTO
+     */
+    public function prepareParams(string $params): ParamDTO
+    {
+        $params = explode('|', $params);
+        $name   = ucwords(strtolower(trim($params[0])));
+        $age    = $params[1];
+
+        return new ParamDTO($age, $name);
+    }
 }

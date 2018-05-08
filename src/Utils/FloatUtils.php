@@ -1,15 +1,21 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Grzegorz
- * Date: 07.05.2018
- * Time: 18:18
- */
+<?php declare(strict_types=1);
 
 namespace App\Utils;
 
-
-class FloatUtils
+/**
+ * Class FloatUtils
+ *
+ * @package App\Utils
+ */
+class FloatUtils implements UtilsInterface
 {
-
+    /**
+     * @param float $number
+     *
+     * @return float
+     */
+    public function roundUp(float $number): ?float
+    {
+        return ceil($number * 100) / 100;
+    }
 }

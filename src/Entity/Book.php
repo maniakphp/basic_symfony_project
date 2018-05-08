@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Books
+ * Book
  *
  * @ORM\Table(name="books")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
  */
-class Books
+class Book
 {
     /**
      * @var int
@@ -39,6 +39,14 @@ class Books
     {
         $this->name     = $name;
         $this->bookDate = $bookDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     /**

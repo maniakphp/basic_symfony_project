@@ -3,31 +3,39 @@ version: '2'
 services:
     data:
         image: busybox
-        container_name: anonse_data
+        container_name: sf_data
+        restart: always
         volumes:
-            - "../:/var/www/html"
+            - "./:/var/www/html"
 
     server:
-        build: nginx
-        container_name: anonse_server
+        build: docker/nginx
+        container_name: sf_server
+        restart: always
         ports:
-            - "82:80"
+            - "80:80"
         volumes_from:
             - data
         links:
             - php
 
     php:
-        build: php
-        container_name: anonse_php
+        build: docker/php
+        container_name: sf_php
+        restart: always
         volumes_from:
             - data
 
     database:
         image: mariadb:latest
-        container_name: anonse_database
+        container_name: sf_database
+        restart: always
         ports:
-            - "3307:3306"
-        env_file: .env
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: docker
+            MYSQL_PASSWORD: docker
         volumes_from:
             - data

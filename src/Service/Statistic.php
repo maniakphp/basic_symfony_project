@@ -9,11 +9,11 @@ use App\Utils\FloatUtils;
 use App\Utils\ParamParser;
 
 /**
- * Class Statistics
+ * Class Statistic
  *
  * @package App\Service
  */
-class Statistics
+class Statistic
 {
     /**
      * @var ReviewRepository
@@ -31,7 +31,7 @@ class Statistics
     protected $floatUtils;
 
     /**
-     * Statistics constructor.
+     * Statistic constructor.
      *
      * @param ReviewRepository $repository
      * @param ParamParser      $paramParser
@@ -52,17 +52,17 @@ class Statistics
      *
      * @return array
      */
-    public function getStatistics(string $criteria)
+    public function getStatistic(string $criteria): array
     {
         $params = $this->paramParser->prepareParams($criteria);
 
-        $statistics = $this->reviewRepository->findByNameAndAge($params);
+        $statistic = $this->reviewRepository->findByNameAndAge($params);
 
-        if (0 === count($statistics)) {
-            $statistics = $this->reviewRepository->findByAge($params);
+        if (0 === count($statistic)) {
+            $statistic = $this->reviewRepository->findByAge($params);
         }
 
-        return $this->getStatisticsDTO($statistics, $params);
+        return $this->getStatisticDTO($statistic, $params);
     }
 
     /**
@@ -71,7 +71,7 @@ class Statistics
      *
      * @return array
      */
-    public function getStatisticsDTO(array $statistics, ParamDTO $params)
+    public function getStatisticDTO(array $statistics, ParamDTO $params): array
     {
         $searchedName = $params->getName();
 
@@ -94,7 +94,16 @@ class Statistics
             $collection[] = $statisticDTO;
         }
 
+        return $collection;
+    }
 
+    /**
+     * @param array $collection
+     *
+     * @return array
+     */
+    public function sortStatistic(array $collection): array
+    {
         usort($collection, function (StatisticDTO $a, StatisticDTO $b) {
             return $a->getCompatibility() < $b->getCompatibility();
         });

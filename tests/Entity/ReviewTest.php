@@ -1,21 +1,15 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Grzegorz
- * Date: 29.04.2018
- * Time: 19:01
- */
+<?php declare(strict_types=1);
 
 namespace App\Tests\Entity;
 
 use App\Entity\Book;
-use App\Entity\Reviews;
+use App\Entity\Review;
 use PHPUnit\Framework\TestCase;
 
-class ReviewsTest extends TestCase
+class ReviewTest extends TestCase
 {
     /**
-     * @var Reviews
+     * @var Review
      */
     private $entity;
 
@@ -30,16 +24,16 @@ class ReviewsTest extends TestCase
         $this->provider = [
             [
                 'age'  => 22,
-                'sex'  => Reviews::MALE,
+                'sex'  => Review::MALE,
                 'book' => $this->createMock(Book::class),
             ],
             [
                 'age'  => 55,
-                'sex'  => Reviews::FEMALE,
+                'sex'  => Review::FEMALE,
                 'book' => $this->createMock(Book::class),
             ],
         ];
-        $this->entity   = new Reviews(
+        $this->entity   = new Review(
             $this->provider[0]['age'],
             $this->provider[0]['sex'],
             $this->provider[0]['book']
@@ -48,13 +42,13 @@ class ReviewsTest extends TestCase
 
     public function testConstruct()
     {
-        $reviews = new Reviews(
+        $reviews = new Review(
             $this->provider[1]['age'],
             $this->provider[1]['sex'],
             $this->provider[1]['book']
         );
 
-        $this->assertInstanceOf(Reviews::class, $reviews);
+        $this->assertInstanceOf(Review::class, $reviews);
     }
 
     /**
@@ -63,7 +57,7 @@ class ReviewsTest extends TestCase
      */
     public function testConstructInvalidSexValue()
     {
-        $reviews = new Reviews(
+        $reviews = new Review(
             $this->provider[1]['age'],
             'pies',
             $this->provider[1]['book']

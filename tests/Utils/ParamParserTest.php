@@ -1,16 +1,19 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Grzegorz
- * Date: 07.05.2018
- * Time: 17:25
- */
+<?php declare(strict_types=1);
 
 namespace App\Tests\Utils;
 
+use App\DTO\ParamDTO;
 use App\Utils\ParamParser;
+use PHPUnit\Framework\TestCase;
 
-class ParamParserTest extends \PHPUnit_Framework_TestCase
+class ParamParserTest extends TestCase
 {
 
+    public function testPrepareParamsReturnObject()
+    {
+        $parser = new ParamParser();
+        $result = $parser->prepareParams('KróL LEw|age<13');
+
+        $this->assertInstanceOf(ParamDTO::class, $result);
+    }
 }
